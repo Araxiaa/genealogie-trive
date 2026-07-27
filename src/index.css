@@ -1,0 +1,1088 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Thème clair (par défaut) */
+  --couleur-fond: #e8e0d0;
+  --couleur-fond-carte: #f4efe4;
+  --couleur-texte: #2a2420;
+  --couleur-texte-discret: #8a8070;
+  --couleur-bordure: #d4c9b0;
+
+  --clan-tonnerre: #3f5a44;
+  --clan-vent: #8a8570;
+  --clan-ombre: #3a5654;
+  --couleur-accent: #b5573a;
+
+  --police-titre: 'Bitter', Georgia, serif;
+  --police-corps: 'Work Sans', system-ui, sans-serif;
+  --police-mono: 'Space Mono', monospace;
+}
+
+[data-theme='sombre'] {
+  --couleur-fond: #1c1815;
+  --couleur-fond-carte: #262019;
+  --couleur-texte: #e8e0d0;
+  --couleur-texte-discret: #8f8674;
+  --couleur-bordure: #3a3128;
+
+  --clan-tonnerre: #5c8265;
+  --clan-vent: #b0a98c;
+  --clan-ombre: #4f7d7a;
+  --couleur-accent: #d97a54;
+}
+
+body {
+  font-family: var(--police-corps);
+  background-color: var(--couleur-fond);
+  color: var(--couleur-texte);
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+h1, h2, h3 {
+  font-family: var(--police-titre);
+}
+
+.page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 16px;
+  color: var(--couleur-texte-discret);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-family: var(--police-mono);
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 1rem;
+  font-family: var(--police-corps);
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 4px;
+  margin-bottom: 8px;
+  background: var(--couleur-fond-carte);
+  color: var(--couleur-texte);
+}
+
+.camp-list, .person-list, .search-results {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+}
+
+.camp-list li, .person-list li, .search-results li {
+  margin-bottom: 6px;
+}
+
+.camp-list a, .person-list a, .search-results a {
+  display: block;
+  padding: 10px 14px;
+  background: var(--couleur-fond-carte);
+  border-radius: 4px;
+  border: 1px solid var(--couleur-bordure);
+  border-left: 3px solid var(--couleur-bordure);
+  text-decoration: none;
+  color: var(--couleur-texte);
+  transition: border-left-color 0.15s, transform 0.1s;
+}
+
+.camp-list a:hover, .person-list a:hover, .search-results a:hover {
+  border-left-color: var(--couleur-accent);
+  transform: translateX(2px);
+}
+
+.person-name-dead {
+  opacity: 0.65;
+  font-style: italic;
+}
+
+.badge-mort {
+  display: inline-block;
+  font-family: var(--police-mono);
+  font-size: 0.7rem;
+  background: var(--couleur-fond);
+  color: var(--couleur-texte-discret);
+  border: 1px solid var(--couleur-bordure);
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-left: 8px;
+}
+
+.family-section {
+  margin-top: 28px;
+}
+
+.family-section h2 {
+  font-size: 0.85rem;
+  color: var(--couleur-texte-discret);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: var(--police-mono);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.family-section .empty {
+  color: var(--couleur-texte-discret);
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* Sceau de clan : petit badge circulaire coloré */
+.sceau-clan {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-family: var(--police-titre);
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: #f4efe4;
+  flex-shrink: 0;
+}
+
+.sceau-clan.tonnerre { background: var(--clan-tonnerre); }
+.sceau-clan.vent { background: var(--clan-vent); }
+.sceau-clan.ombre { background: var(--clan-ombre); }
+.sceau-clan.groupe { background: var(--couleur-texte-discret); }
+
+/* En-tête de page avec bord déchiré — l'élément signature du site */
+.entete-page {
+  background: var(--couleur-fond-carte);
+  padding: 40px 24px 56px;
+  margin: -24px -16px 32px;
+  position: relative;
+  border-bottom: 1px solid var(--couleur-bordure);
+}
+
+.entete-page::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 14px;
+  background: var(--couleur-fond);
+  clip-path: polygon(
+    0% 0%, 3% 60%, 6% 10%, 9% 80%, 12% 30%, 15% 90%, 18% 20%, 21% 70%,
+    24% 0%, 27% 60%, 30% 15%, 33% 85%, 36% 25%, 39% 95%, 42% 10%, 45% 65%,
+    48% 5%, 51% 75%, 54% 20%, 57% 90%, 60% 30%, 63% 60%, 66% 0%, 69% 80%,
+    72% 15%, 75% 95%, 78% 25%, 81% 70%, 84% 5%, 87% 85%, 90% 20%, 93% 60%,
+    96% 10%, 100% 75%, 100% 100%, 0% 100%
+  );
+}
+
+.entete-page h1 {
+  font-size: 2.2rem;
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+.entete-page .sous-titre {
+  color: var(--couleur-texte-discret);
+  font-family: var(--police-mono);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+.search-input-hero {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 1.05rem;
+  font-family: var(--police-corps);
+  background: var(--couleur-fond);
+  border: none;
+  border-bottom: 2px solid var(--couleur-accent);
+  margin-top: 24px;
+  color: var(--couleur-texte);
+}
+
+.search-input-hero:focus {
+  outline: none;
+  border-bottom-color: var(--clan-tonnerre);
+}
+
+/* Grille de cartes de territoire (clans/groupes) */
+.grille-camps {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+}
+
+.carte-camp {
+  display: block;
+  text-decoration: none;
+  color: var(--couleur-texte);
+  padding: 24px 20px;
+  border-radius: 6px;
+  border: 1px solid var(--couleur-bordure);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.carte-camp::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  background: var(--couleur-camp, var(--couleur-texte-discret));
+}
+
+.carte-camp:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.carte-camp .sceau-clan {
+  width: 40px;
+  height: 40px;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.carte-camp .nom-camp {
+  font-family: var(--police-titre);
+  font-size: 1.3rem;
+  display: block;
+  margin-bottom: 4px;
+  position: relative;
+}
+
+.carte-camp .meta-camp {
+  font-family: var(--police-mono);
+  font-size: 0.8rem;
+  color: var(--couleur-texte-discret);
+  position: relative;
+}
+
+/* Avatar circulaire avec silhouette de secours */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--couleur-bordure);
+  border: 2px solid var(--couleur-fond-carte);
+}
+
+.avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--couleur-bordure);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--police-titre);
+  color: var(--couleur-fond-carte);
+  font-weight: 700;
+}
+
+.ligne-personne {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.meta-extra {
+  font-family: var(--police-mono);
+  font-size: 0.8rem;
+  color: var(--couleur-texte-discret);
+}
+
+/* Grille de cartes-personnes (utilisée sur la page clan) */
+.grille-personnes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+}
+
+.carte-personne {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 16px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--couleur-bordure);
+  background: var(--couleur-fond-carte);
+  text-decoration: none;
+  color: var(--couleur-texte);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.carte-personne:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.carte-personne.mort {
+  opacity: 0.6;
+}
+
+.avatar-xl, .avatar-placeholder-xl {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+
+.avatar-xl {
+  object-fit: cover;
+  border: 3px solid var(--couleur-fond-carte);
+  box-shadow: 0 0 0 1px var(--couleur-bordure);
+}
+
+.avatar-placeholder-xl {
+  background: var(--couleur-bordure);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--police-titre);
+  font-size: 2rem;
+  color: var(--couleur-fond-carte);
+}
+
+.avatar-sm, .avatar-placeholder-sm {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.avatar-sm {
+  object-fit: cover;
+}
+
+.avatar-placeholder-sm {
+  background: var(--couleur-bordure);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--police-titre);
+  font-size: 0.9rem;
+  color: var(--couleur-fond-carte);
+}
+
+.carte-personne .nom-personne {
+  font-family: var(--police-titre);
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+.entete-fiche {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.entete-fiche .infos-nom {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.description-fiche {
+  color: var(--couleur-texte-discret);
+  font-style: italic;
+  margin-top: 12px;
+}
+
+.bouton-theme {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--couleur-bordure);
+  background: var(--couleur-fond-carte);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: transform 0.15s ease;
+}
+
+.bouton-theme:hover {
+  transform: scale(1.08);
+}
+
+.lien-staff {
+  position: fixed;
+  top: 16px;
+  right: 64px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--couleur-bordure);
+  background: var(--couleur-fond-carte);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  text-decoration: none;
+  z-index: 100;
+  transition: transform 0.15s ease;
+}
+
+.lien-staff:hover {
+  transform: scale(1.08);
+}
+
+.famille-classement {
+  margin-bottom: 40px;
+}
+
+.famille-classement h2 {
+  font-family: var(--police-titre);
+  font-size: 1.3rem;
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.liste-classement {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: rang;
+}
+
+.liste-classement li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.liste-classement li > a {
+  flex: 1;
+}
+
+.rang {
+  font-family: var(--police-mono);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--couleur-texte-discret);
+  width: 28px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.liste-classement li:nth-child(1) .rang {
+  color: var(--couleur-accent);
+  font-size: 1.3rem;
+}
+
+.lien-pantheon {
+  display: inline-block;
+  margin-top: 16px;
+  color: var(--couleur-accent);
+  text-decoration: none;
+  font-family: var(--police-mono);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.lien-pantheon:hover {
+  text-decoration: underline;
+}
+
+.note-item {
+  background: var(--couleur-fond-carte);
+  border: 1px solid var(--couleur-bordure);
+  border-left: 3px solid var(--couleur-accent);
+  border-radius: 4px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.note-item .meta-extra {
+  display: block;
+  margin-top: 6px;
+}
+
+.timeline-vie {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-left: 2px solid var(--couleur-bordure);
+}
+
+.timeline-vie li {
+  position: relative;
+  padding: 0 0 20px 20px;
+}
+
+.timeline-vie li::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--couleur-accent);
+}
+
+.timeline-vie .date-evenement {
+  font-family: var(--police-mono);
+  font-size: 0.75rem;
+  color: var(--couleur-texte-discret);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.timeline-vie .titre-evenement {
+  font-family: var(--police-titre);
+  font-size: 1.05rem;
+  margin: 4px 0;
+}
+
+.timeline-vie .description-evenement {
+  color: var(--couleur-texte-discret);
+  font-size: 0.9rem;
+}
+
+.sang-clanique {
+  margin-top: 12px;
+}
+
+.barre-sang {
+  display: flex;
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid var(--couleur-bordure);
+}
+
+.segment-sang {
+  height: 100%;
+}
+
+.legende-sang {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 6px;
+  font-family: var(--police-mono);
+  font-size: 0.75rem;
+  color: var(--couleur-texte-discret);
+}
+
+.legende-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.pastille {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.carte-vedette {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  background: var(--couleur-fond-carte);
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 8px;
+  padding: 20px;
+  text-decoration: none;
+  color: var(--couleur-texte);
+  margin-bottom: 32px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.carte-vedette:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.carte-vedette .eyebrow-vedette {
+  font-family: var(--police-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--couleur-accent);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.carte-vedette .nom-vedette {
+  font-family: var(--police-titre);
+  font-size: 1.4rem;
+  display: block;
+}
+
+.carte-vedette .description-vedette {
+  color: var(--couleur-texte-discret);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.barre-filtres {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.filtre-bouton {
+  padding: 6px 14px;
+  border-radius: 16px;
+  border: 1px solid var(--couleur-bordure);
+  background: var(--couleur-fond-carte);
+  color: var(--couleur-texte-discret);
+  font-family: var(--police-mono);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.filtre-bouton.actif {
+  background: var(--couleur-accent);
+  border-color: var(--couleur-accent);
+  color: white;
+}
+
+.bouton-voir-plus {
+  display: block;
+  width: 100%;
+  margin-top: 24px;
+  padding: 12px;
+  background: var(--couleur-fond-carte);
+  border: 1px dashed var(--couleur-bordure);
+  border-radius: 6px;
+  color: var(--couleur-texte-discret);
+  font-family: var(--police-mono);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.bouton-voir-plus:hover {
+  border-color: var(--couleur-accent);
+  color: var(--couleur-accent);
+}
+
+.badge-nouveau {
+  display: inline-block;
+  font-family: var(--police-mono);
+  font-size: 0.7rem;
+  background: var(--couleur-accent);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-left: 8px;
+}
+
+.bandeau-stats {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--couleur-bordure);
+}
+
+.stat-item {
+  font-family: var(--police-mono);
+}
+
+.stat-valeur {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--couleur-accent);
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--couleur-texte-discret);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.conteneur-arbre {
+  height: 520px;
+  border-radius: 8px;
+  border: 1px solid var(--couleur-bordure);
+  background:
+    radial-gradient(circle at 20% 20%, rgba(0,0,0,0.02) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(0,0,0,0.025) 0%, transparent 55%),
+    var(--couleur-fond);
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.noeud-arbre {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 12px 8px;
+  background: var(--couleur-fond-carte);
+  border: 1.5px solid var(--couleur-bordure);
+  border-radius: 10px;
+  width: 130px;
+  position: relative;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.noeud-arbre:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.12);
+}
+
+.noeud-arbre-actif {
+  border: 2px solid var(--couleur-accent);
+  box-shadow: 0 0 0 4px rgba(181, 87, 58, 0.12), 0 4px 10px rgba(0, 0, 0, 0.1);
+  cursor: default;
+}
+
+.noeud-arbre-mort {
+  opacity: 0.72;
+}
+
+.noeud-arbre-mort .noeud-arbre-avatar {
+  filter: grayscale(0.6);
+}
+
+.noeud-arbre-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--couleur-fond);
+  box-shadow: 0 0 0 1px var(--couleur-bordure);
+}
+
+.noeud-arbre-avatar-vide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--couleur-bordure);
+  color: var(--couleur-fond-carte);
+  font-family: var(--police-titre);
+  font-size: 1.2rem;
+}
+
+.noeud-arbre-nom {
+  font-family: var(--police-titre);
+  font-size: 0.82rem;
+  text-align: center;
+  line-height: 1.2;
+  color: var(--couleur-texte);
+}
+
+.noeud-arbre-croix {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  font-size: 0.9rem;
+}
+
+/* Masque les points de connexion de reactflow, gardés fonctionnels mais invisibles */
+.react-flow__handle {
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  min-width: 1px;
+  min-height: 1px;
+  border: none;
+  background: transparent;
+}
+
+/* Boutons uniformisés partout sur le site */
+button {
+  font-family: var(--police-corps);
+  font-size: 0.9rem;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--couleur-bordure);
+  background: var(--couleur-fond-carte);
+  color: var(--couleur-texte);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+button:hover:not(:disabled) {
+  border-color: var(--couleur-accent);
+  color: var(--couleur-accent);
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Les boutons de soumission de formulaire ressortent comme action principale */
+button[type='submit'] {
+  background: var(--couleur-accent);
+  color: white;
+  border-color: var(--couleur-accent);
+  font-weight: 600;
+}
+
+button[type='submit']:hover:not(:disabled) {
+  filter: brightness(1.08);
+  color: white;
+}
+
+/* Champs de formulaire uniformisés (au cas où ils n'ont pas déjà .search-input) */
+input[type='text'],
+input[type='number'],
+textarea,
+select {
+  font-family: var(--police-corps);
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--couleur-bordure);
+  background: var(--couleur-fond-carte);
+  color: var(--couleur-texte);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--couleur-accent);
+  outline-offset: 1px;
+}
+
+label {
+  font-size: 0.9rem;
+  color: var(--couleur-texte-discret);
+  display: block;
+}
+
+/* Séparateurs plus doux que la ligne pleine par défaut */
+hr {
+  border: none;
+  border-top: 1px dashed var(--couleur-bordure);
+}
+
+/* Meilleur confort de lecture général */
+p {
+  line-height: 1.6;
+}
+
+.family-section {
+  padding-bottom: 4px;
+}
+
+/* Petites étiquettes de statut plus lisibles dans les listes staff */
+.person-list li {
+  line-height: 1.5;
+}
+
+.grille-outils-staff {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.carte-outil-staff {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px;
+  background: var(--couleur-fond-carte);
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--couleur-texte);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.carte-outil-staff:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  border-color: var(--couleur-accent);
+}
+
+.carte-outil-icone {
+  font-size: 1.6rem;
+}
+
+.carte-outil-titre {
+  font-family: var(--police-titre);
+  font-size: 1.05rem;
+}
+
+.carte-outil-description {
+  color: var(--couleur-texte-discret);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.carte-outil-admin {
+  border-style: dashed;
+  border-color: var(--couleur-accent);
+}
+
+.grille-audela {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 14px;
+}
+
+.carte-audela {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 24px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-family: var(--police-titre);
+  font-size: 0.95rem;
+  transition: transform 0.15s ease;
+  border: 1px solid var(--couleur-bordure);
+}
+
+.carte-audela:hover {
+  transform: translateY(-3px);
+}
+
+.audela-icone {
+  font-size: 1.8rem;
+}
+
+.carte-audela-etoiles {
+  background: linear-gradient(160deg, #1c1f3a, #2f2a55);
+  color: #f4e9c9;
+  border-color: #4a4470;
+}
+
+.carte-audela-sombre {
+  background: linear-gradient(160deg, #1a1512, #2b1f1a);
+  color: #a89e8f;
+  border-color: #3a2a20;
+}
+
+.carte-audela-purgatoire {
+  background: linear-gradient(160deg, #3a3a3a, #5a5a5a);
+  color: #e8e0d0;
+  border-color: #6a6a6a;
+}
+
+.bloc-audela {
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.bloc-audela h2 {
+  font-family: var(--police-titre);
+  font-size: 1.2rem;
+  text-transform: none;
+  letter-spacing: normal;
+  margin-bottom: 12px;
+}
+
+.audela-etoiles {
+  background: linear-gradient(160deg, rgba(28,31,58,0.06), rgba(47,42,85,0.1));
+  border: 1px solid #4a4470;
+}
+
+.audela-sombre {
+  background: linear-gradient(160deg, rgba(26,21,18,0.06), rgba(43,31,26,0.1));
+  border: 1px solid #3a2a20;
+}
+
+.audela-purgatoire {
+  background: linear-gradient(160deg, rgba(58,58,58,0.05), rgba(90,90,90,0.08));
+  border: 1px solid #6a6a6a;
+}
+
+.index-alphabetique {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 16px 0;
+  padding: 10px;
+  background: var(--couleur-fond-carte);
+  border-radius: 6px;
+  border: 1px solid var(--couleur-bordure);
+  position: sticky;
+  top: 8px;
+  z-index: 10;
+}
+
+.index-alphabetique a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  font-family: var(--police-mono);
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: var(--couleur-texte-discret);
+}
+
+.index-alphabetique a:hover {
+  background: var(--couleur-accent);
+  color: white;
+}
+
+.groupe-alphabetique {
+  margin-bottom: 20px;
+}
+
+.titre-lettre {
+  font-family: var(--police-titre);
+  font-size: 1.3rem;
+  color: var(--couleur-accent);
+  border-bottom: 1px dashed var(--couleur-bordure);
+  padding-bottom: 4px;
+  margin-bottom: 10px;
+}
