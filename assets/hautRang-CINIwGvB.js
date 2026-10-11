@@ -1,0 +1,1 @@
+function e(e){return e?e.toLowerCase().trim().normalize(`NFD`).replace(/[\u0300-\u036f]/g,``):``}var t={chef:`couronne`,lieutenant:`griffes`,lieutenante:`griffes`,guerisseur:`feuille`,guerisseuse:`feuille`};function n(n,r){let i=t[e(n)];if(i)return{icone:i,actuel:!0};let a=t[e(r)];return a?{icone:a,actuel:!1}:null}export{e as n,n as t};
