@@ -1,16 +1,21 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Le Prix de la Trêve — registre des lignées : personnages, clans, familles et histoire du serveur." />
+    <meta name="theme-color" content="#0d1311" />
     <link rel="icon" type="image/svg+xml" href="/genealogie-trive/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;700&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>genealogie-trive</title>
-    <script type="module" crossorigin src="/genealogie-trive/assets/index-CON2hThP.js"></script>
-    <link rel="stylesheet" crossorigin href="/genealogie-trive/assets/index-voDnT9Y8.css">
+    <title>Le Prix de la Trêve — Registre des lignées</title>
+    <script>
+      // Applique le thème avant le premier rendu pour éviter tout flash
+      try {
+        var t = localStorage.getItem('theme') || 'sombre';
+        if (t === 'sombre') document.documentElement.setAttribute('data-theme', 'sombre');
+      } catch (e) { document.documentElement.setAttribute('data-theme', 'sombre'); }
+    </script>
+    <script type="module" crossorigin src="/genealogie-trive/assets/index-fCwr3Po2.js"></script>
+    <link rel="stylesheet" crossorigin href="/genealogie-trive/assets/index-Bst-ou2u.css">
   </head>
   <body>
     <div id="root"></div>

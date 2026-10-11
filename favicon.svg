@@ -1,9 +1,6 @@
 <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="32" cy="32" r="32" fill="#e8e0d0"/>
-  <rect x="28" y="36" width="8" height="18" rx="2" fill="#5c4a35"/>
-  <circle cx="32" cy="22" r="15" fill="#3f5a44"/>
-  <circle cx="18" cy="29" r="10" fill="#3f5a44"/>
-  <circle cx="46" cy="29" r="10" fill="#3f5a44"/>
-  <circle cx="24" cy="16" r="3" fill="#b5573a" opacity="0.85"/>
-  <circle cx="42" cy="18" r="2.4" fill="#c98a2e" opacity="0.85"/>
+  <rect width="64" height="64" rx="14" fill="#0c1210"/>
+  <path d="M42 11A22 22 0 1 0 53 42 17.5 17.5 0 0 1 42 11Z" fill="#e2b866"/>
+  <circle cx="48" cy="19" r="2" fill="#efe3b8"/>
+  <circle cx="54" cy="29" r="1.3" fill="#efe3b8"/>
 </svg>
