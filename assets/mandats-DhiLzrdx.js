@@ -1,0 +1,1 @@
+var e=`id, person_id, camp_id, rang_id, lune_debut, lune_fin, note, camps_ref(id, name, couleur, icone), rangs(id, nom, nom_feminin, icone, couleur, haut_rang)`;function t(e,t,n){return e.lune_fin!==null&&e.lune_fin!==void 0?e.lune_fin:Math.max(e.lune_debut,t??n)}function n(e){let t=e.rangs?.nom||`Mandat`,n=e.camps_ref?.name;return n?`${t} — ${n}`:t}export{t as n,n as r,e as t};
