@@ -1,1 +1,0 @@
-import{a as e}from"./index-B6_Q2ehp.js";function t(t,n){let r=e(t);if(r?.haut_rang)return{icone:r.icone||`couronne`,couleur:r.couleur,actuel:!0};let i=e(n);return i?.haut_rang?{icone:i.icone||`couronne`,couleur:i.couleur,actuel:!1}:null}export{t};
