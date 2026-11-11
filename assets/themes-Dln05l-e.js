@@ -1,0 +1,1 @@
+import{t as e}from"./supabaseClient-DEhQ1w8O.js";var t=[{cle:`rond`,label:`Rond`},{cle:`losange`,label:`Losange`},{cle:`ecusson`,label:`Écusson`},{cle:`etendard`,label:`Étendard`}];async function n(){let{data:t}=await e.from(`themes_evenements`).select(`*`).order(`ordre`,{ascending:!0}).order(`nom`,{ascending:!0});return t||[]}export{n,t};
