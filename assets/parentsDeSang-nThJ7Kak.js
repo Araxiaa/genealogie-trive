@@ -1,0 +1,1 @@
+import{t as e}from"./supabaseClient-DEhQ1w8O.js";async function t(t){let n=new Map(t.map(e=>[e,[]]));if(t.length===0)return n;let{data:r}=await e.from(`parentages`).select(`child_id, persons!parentages_parent_id_fkey(id, name, genotype, gender)`).in(`child_id`,t).eq(`type`,`biologique`);return(r||[]).forEach(e=>{e.persons&&n.get(e.child_id)?.push(e.persons)}),n}export{t};
